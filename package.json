@@ -1,0 +1,11 @@
+{
+  "name": "fass-tarea-5",
+  "dependencies": {
+    "body-parser": "latest",
+    "cors": "^2.8.5",
+    "express": "latest",
+    "lambda-api": "latest",
+    "mongodb": "latest",
+    "serverless-http": "latest"
+  }
+}
