@@ -14,8 +14,6 @@ exports.handler = async (event, context) => {
     const authors = await client.db("tvnews").collection("news").find({}).toArray();
 
     return { statusCode: 200, headers, body: JSON.stringify(authors)};
-
-
    
   } catch (error) {
     console.log(error);
