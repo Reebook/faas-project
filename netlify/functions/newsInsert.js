@@ -12,7 +12,6 @@ exports.handler = async (event, context) => {
   try {
     const client = await clientPromise;
     const data = JSON.parse(event.body);
-    data._id = data._id
     console.log(event.body)
 
     await client.db("tvnews").collection("news").insertOne(data);
