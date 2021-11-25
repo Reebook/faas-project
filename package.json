@@ -1,9 +1,10 @@
 {
-  "name": "fass-tarea-5",
+  "name": "fass-project",
   "dependencies": {
     "body-parser": "latest",
     "lambda-api": "latest",
     "mongodb": "latest",
-    "serverless-http": "latest"
+    "serverless-http": "latest",
+    "amqplib": "latest"
   }
 }
