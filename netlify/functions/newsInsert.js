@@ -10,7 +10,7 @@ exports.handler = async (event, context) => {
   }
   if (event.httpMethod === "POST") {
     try {
-      
+      console.log(event.body);
       const client = await clientPromise;
       const data = JSON.parse(event.body);
 
