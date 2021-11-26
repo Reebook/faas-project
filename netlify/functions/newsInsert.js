@@ -4,17 +4,20 @@ const clientPromise = require('./mongoDB');
 const headers = require('./headersCORS');
 
 exports.handler = async (event, context) => {
+  if (event.httpMethod === "POST") {
+    try {
+      
+      const client = await clientPromise;
+      const data = JSON.parse(event.body);
 
-  try {
-    const client = await clientPromise;
-    console.log(event.body)
-    const data = JSON.parse(event.body);
+      await client.db("tvnews").collection("news").insertOne(data);
 
-    await client.db("tvnews").collection("news").insertOne(data);
-
-    return { statusCode: 200, headers, body: 'OK'};
-  } catch (error) {
-    console.log(error);
-    return { statusCode: 422, headers, body: JSON.stringify(error) };
+      return { statusCode: 200, headers, body: 'OK'};
+    } catch (error) {
+      console.log(error);
+      return { statusCode: 422, headers, body: JSON.stringify(error) };
+    }
+  }else{
+    return { statusCode: 405, headers, body: JSON.stringify("'message': 'Method Not Allowed'")};
   }
 };
