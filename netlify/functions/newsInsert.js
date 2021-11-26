@@ -4,6 +4,10 @@ const clientPromise = require('./mongoDB');
 const headers = require('./headersCORS');
 
 exports.handler = async (event, context) => {
+
+  if (event.httpMethod == "OPTIONS") {
+    return { statusCode: 200, headers, body: "OK" };
+  }
   if (event.httpMethod === "POST") {
     try {
       
