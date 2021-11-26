@@ -6,12 +6,8 @@ const rabbitPromise = require('./rabbitMQ');
 
 exports.handler = async (event, context) => {
 
-  if (event.httpMethod == "OPTIONS") {
-    return {statusCode: 200,headers,body: "OK"};
-  }
-
   try {
-    const id = parseInt(event.path.split("/").reverse()[0]);
+    const id = event.path.split("/").reverse()[0];
 
     const channel = await rabbitPromise();
     const request = `{'method':'INSERT','id':${id},'body':${event.body}}`;
