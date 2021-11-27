@@ -10,7 +10,8 @@ exports.handler = async (event, context) => {
     const id = event.path.split("/").reverse()[0];
     
     var ObjectID = clientPromise.ObjectId;
-    await client.db("tvnews").collection("news").deleteOne({_id: new ObjectID(id)});
+    console.log(ObjectID);
+    await client.db("tvnews").collection("news").deleteOne({_id: ObjectID(id)});
 
     return { statusCode: 200, headers, body: 'OK'};
   } catch (error) {
