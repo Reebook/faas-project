@@ -11,7 +11,6 @@ exports.handler = async (event, context) => {
     const id = event.path.split("/").reverse()[0];
     
     var ObjectID = MongoDB.ObjectId;
-    console.log(ObjectID);
     await client.db("tvnews").collection("news").deleteOne({_id: new ObjectID(id)});
 
     return { statusCode: 200, headers, body: 'OK'};
