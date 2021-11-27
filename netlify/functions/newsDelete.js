@@ -9,7 +9,7 @@ exports.handler = async (event, context) => {
     const client = await clientPromise;
     const id = event.path.split("/").reverse()[0];
     
-    var ObjectID = clientPromise.ObjectId;
+    var ObjectID = client.ObjectId;
     console.log(ObjectID);
     await client.db("tvnews").collection("news").deleteOne({_id: ObjectID(id)});
 
