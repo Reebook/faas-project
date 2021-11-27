@@ -5,6 +5,7 @@
     "lambda-api": "latest",
     "mongodb": "latest",
     "serverless-http": "latest",
-    "amqplib": "latest"
+    "amqplib": "latest",
+    "node-fetch":"latest"
   }
 }

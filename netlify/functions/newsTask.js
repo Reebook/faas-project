@@ -1,7 +1,7 @@
 "use strict"
 
 const rabbitPromise = require('./rabbitMQ');
-
+const fetch = require("node-fetch");
 const headers = require('./headersCORS');
 
 const url = 'https://backend-project-ii.netlify.app/.netlify/functions/'
@@ -16,7 +16,6 @@ exports.handler = async (event, context) => {
     const channel = await rabbitPromise();
     let message = await channel.get("newsStore",{'noAck':true});
     while (message) {
-      console.log(message.content.toString())
       const request = JSON.parse(message.content.toString());
       switch (request.method) {
         case "DELETE":
