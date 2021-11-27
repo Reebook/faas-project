@@ -6,6 +6,6 @@
     "mongodb": "latest",
     "serverless-http": "latest",
     "amqplib": "latest",
-    "node-fetch":"latest"
+    "node-fetch":"2.6.1"
   }
 }
