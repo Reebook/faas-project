@@ -1,7 +1,7 @@
 "use strict"
 
 const rabbitPromise = require('./rabbitMQ');
-const fetch = require("node-fetch");
+import fetch from 'node-fetch';
 const headers = require('./headersCORS');
 
 const url = 'https://backend-project-ii.netlify.app/.netlify/functions/'
