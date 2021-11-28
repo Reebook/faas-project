@@ -5,8 +5,13 @@ const headers = require('./headersCORS');
 const rabbitPromise = require('./rabbitMQ');
 
 exports.handler = async (event, context) => {
+  
+  if (event.httpMethod == "OPTIONS") {
+    return { statusCode: 200, headers, body: "OK" };
+  }
 
   try {
+
     const channel = await rabbitPromise();
     const request = `{"method":"INSERT","body":${event.body}}`;
     await channel.sendToQueue("newsStore", Buffer.from(request));
