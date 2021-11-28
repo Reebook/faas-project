@@ -1,27 +1,19 @@
 "use strict"
 
-const clientPromise = require('./mongoDB');
 const headers = require('./headersCORS');
+
+const rabbitPromise = require('./rabbitMQ');
 
 exports.handler = async (event, context) => {
 
-  if (event.httpMethod == "OPTIONS") {
-    return { statusCode: 200, headers, body: "OK" };
-  }
-  if (event.httpMethod === "POST") {
-    try {
-      console.log(event.body);
-      const client = await clientPromise;
-      const data = JSON.parse(event.body);
+  try {
+    const channel = await rabbitPromise();
+    const request = `{"method":"INSERT","body":${event.body}}`;
+    await channel.sendToQueue("newsStore", Buffer.from(request));
 
-      await client.db("tvnews").collection("news").insertOne(data);
-
-      return { statusCode: 200, headers, body: 'OK'};
-    } catch (error) {
-      console.log(error);
-      return { statusCode: 422, headers, body: JSON.stringify(error) };
-    }
-  }else{
-    return { statusCode: 405, headers, body: JSON.stringify("'message': 'Method Not Allowed'")};
+    return { statusCode: 200, headers, body: 'OK'};
+  } catch (error) {
+    console.log(error);
+    return { statusCode: 422, headers, body: JSON.stringify(error) };
   }
 };
