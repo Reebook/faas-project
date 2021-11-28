@@ -17,7 +17,7 @@ exports.handler = async (event, context) => {
     const request = `{'method':'DELETE','id': ${id} }`;
     await channel.sendToQueue("newsStore", Buffer.from(request));
 
-    return {statusCode: 200,headers,body: status};
+    return {statusCode: 200,headers,body: 'OK'};
   } catch (error) {
     console.log(error);
     return {statusCode: 422,headers,body: JSON.stringify(error)};
