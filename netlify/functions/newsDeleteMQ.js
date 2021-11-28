@@ -11,7 +11,7 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    const id = parseInt(event.path.split("/").reverse()[0]);
+    const id = event.path.split("/").reverse()[0];
 
     const channel = await rabbitPromise();
     const request = `{'method':'DELETE','id': ${id} }`;
