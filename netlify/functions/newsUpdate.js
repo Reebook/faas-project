@@ -2,6 +2,7 @@
 
 const clientPromise = require('./mongoDB');
 const headers = require('./headersCORS');
+const MongoDB = require('mongodb');
 
 exports.handler = async (event, context) => {
 
@@ -9,8 +10,8 @@ exports.handler = async (event, context) => {
     const client = await clientPromise;
     const id = event.path.split("/").reverse()[0];
     const data = JSON.parse(event.body);
-
-    await client.db("tvnews").collection("news").updateOne({_id:String(id)},{$set:data});
+    var ObjectID = MongoDB.ObjectId;
+    await client.db("tvnews").collection("news").updateOne({_id:new ObjectID(id)},{$set:data});
 
     return { statusCode: 200, headers, body: 'OK'};
   } catch (error) {
